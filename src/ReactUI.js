@@ -1,11 +1,8 @@
-// export default function ReactUI(){
-//   return <div></div>;
-// }
 import React, {useEffect, useState} from "react";
 import Card from "./ReactComponents/card";
 import AboutMeModal from "./ReactComponents/Modals/aboutMeModal";
 import UnityModal from "./ReactComponents/Modals/unityModal";
-import { on } from "./store";
+import { on, emit } from "./store";
 
 export default function ReactUI() {
 
@@ -30,11 +27,17 @@ export default function ReactUI() {
       <div>
         <AboutMeModal
           visible={isAboutMeModalVisible}
-          onClose={() => setAboutMeModalVisible(false)}
+          onClose={() => {
+            setAboutMeModalVisible(false)
+            emit("modalClosed");
+          }}
         />
         <UnityModal
           visible={isUnityModalVisible}
-          onClose={() => setUnityModalVisible(false)}
+          onClose={() => {
+            setUnityModalVisible(false)
+            emit("modalClosed");
+          }}
         />
       </div>
 );
