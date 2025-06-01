@@ -19,6 +19,7 @@ export default function initGame() {
     let shuffledCards = [];
     let levelComplete = false;
     let isDialogOpen = false;
+    let isSpawningCards = false;
 
     const levels = [
         {
@@ -87,12 +88,11 @@ export default function initGame() {
 
     k.loadSound("cardFlip1", "./assets/sounds/flipCard1.mp3");
     k.loadSound("cardFlip2", "./assets/sounds/flipCard2.mp3");
-    k.loadSound("shuffleCards1", "./assets/sounds/shuffleCards1.mp3");
-    k.loadSound("shuffleCards2", "./assets/sounds/shuffleCards2.mp3");
+    k.loadSound("restoreCardFlip", "./assets/sounds/restoreCardFlip.mp3");
+    k.loadSound("dealCard", "./assets/sounds/dealCard.mp3");
     k.loadSound("match", "./assets/sounds/match.mp3");
 
     const flipSounds = ["cardFlip1", "cardFlip2"];
-    const shuffleSounds = ["shuffleCards1", "shuffleCards2"];
 
     // --- Utilidades ---
     function getCurrentLevelCards() {
@@ -168,7 +168,7 @@ export default function initGame() {
         });
 
         card.onClick(() => {
-            if (isDialogOpen) return;
+            if (isDialogOpen || isSpawningCards) return;
             if (lockBoard || card.flipped) return;
 
 
@@ -196,7 +196,7 @@ export default function initGame() {
 
                     setTimeout(() => {
                         k.play("match", {
-                            volume: 0.5,
+                            volume: 0.35,
                             speed: 1.2,
                             detune: -150
                         });
@@ -222,6 +222,9 @@ export default function initGame() {
                         firstCard.flipped = false;
                         secondCard.flipped = false;
                         resetTurn();
+                        k.play("restoreCardFlip", {
+                            volume: 0.5
+                        });
                     }, 1000);
                 }
             }
@@ -375,10 +378,7 @@ export default function initGame() {
     }
 
     function spawnAllCardsForLevel(){
-
-        k.play(shuffleSounds[Math.floor(Math.random() * shuffleSounds.length)],{
-            volume: 0.5
-        });
+        isSpawningCards = true;
 
         shuffledCards = getCurrentLevelCards();
 
@@ -396,17 +396,33 @@ export default function initGame() {
 
         let index = 0;
         let delay = 0;
+        
+
         for (let row = 0; row < numRow; row++) {
             for (let col = 0; col < numCol; col++) {
                 if (index >= shuffledCards.length) break;
 
                 const x = startX + col * (cardWidth + gapX);
                 const y = startY + row * (cardHeight + gapY);
+                const thisDelay = delay;
+
+                setTimeout(() => {
+                    k.play("dealCard", {
+                        volume: 0.5
+                    });
+                    
+                }, thisDelay * 1000);
+
                 spawnCard(x, y, shuffledCards[index], delay);
-                delay += 0.05;
+                delay += 0.5;
                 index++;
             }
         }
+
+        const lastCardDelayMs = (delay + 0.5) * 1000; // Convertir a milisegundos
+        setTimeout(() => {
+            isSpawningCards = false;
+        }, lastCardDelayMs);
     }
 
     // --- Iniciar nivel ---
