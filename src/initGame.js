@@ -27,7 +27,7 @@ export default function initGame() {
             ]
         },
         {
-            id: "studys",
+            id: "studies",
             cards: [
                 { src: "./assets/images/card1.png", data: "ESO" },
                 { src: "./assets/images/card2.png", data: "IT" },
@@ -46,6 +46,17 @@ export default function initGame() {
                 { src: "./assets/images/card6.png", data: "hechiceria" },
             ]
         },
+        {
+            id: "skills",
+            cards: [
+                { src: "./assets/images/card1.png", data: "unity" },
+                { src: "./assets/images/card2.png", data: "ue" },
+                { src: "./assets/images/card3.png", data: "react" },
+                { src: "./assets/images/card4.png", data: "spring" },
+                { src: "./assets/images/card5.png", data: "laravel" },
+                { src: "./assets/images/card6.png", data: "codeLanguages" },
+            ]
+        }
     ];
 
     // --- Cargar recursos ---
@@ -107,7 +118,7 @@ export default function initGame() {
 
                 if (firstCard.cardData.src === secondCard.cardData.src) {
 
-                    console.log("Coinciden:", firstCard.cardData, secondCard.cardData);
+                    //Cartas coinciden
 
                     const data = firstCard.cardData.data;
                     if (data) {
@@ -125,7 +136,7 @@ export default function initGame() {
                     }
 
                 } else {
-                    console.log("No coinciden:", firstCard.cardData, secondCard.cardData);
+                    //Cartas no coinciden
 
                     setTimeout(() => {
                         flipCard(firstCard, false);
