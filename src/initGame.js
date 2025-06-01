@@ -85,6 +85,14 @@ export default function initGame() {
     k.loadSprite("cardBack", "./assets/images/cardback.png");
     k.add([k.sprite("background"), k.pos(0, 0), k.layer("bg")]);
 
+    k.loadSound("cardFlip1", "./assets/sounds/flipCard1.mp3");
+    k.loadSound("cardFlip2", "./assets/sounds/flipCard2.mp3");
+    k.loadSound("shuffleCards1", "./assets/sounds/shuffleCards1.mp3");
+    k.loadSound("shuffleCards2", "./assets/sounds/shuffleCards2.mp3");
+    k.loadSound("match", "./assets/sounds/match.mp3");
+
+    const flipSounds = ["cardFlip1", "cardFlip2"];
+
     // --- Utilidades ---
     function getCurrentLevelCards() {
         return [...levels[currentLevelIndex].cards, ...levels[currentLevelIndex].cards]
@@ -99,8 +107,21 @@ export default function initGame() {
     }
 
     function flipCard(card, toFront) {
-        const flipOut = () => card.tween(k.vec2(1, 1), k.vec2(0, 1), 0.2, v => card.scale = v, k.easings.linear);
-        const flipIn = () => card.tween(k.vec2(0, 1), k.vec2(1, 1), 0.2, v => card.scale = v, k.easings.linear);
+        const flipOut = () => card.tween(
+            k.vec2(1, 1), 
+            k.vec2(0, 1), 
+            0.2, 
+            v => card.scale = v, 
+            k.easings.linear
+        );
+
+        const flipIn = () => card.tween(
+            k.vec2(0, 1), 
+            k.vec2(1, 1), 
+            0.2, 
+            v => card.scale = v, 
+            k.easings.linear
+        );
 
         flipOut();
 
@@ -125,9 +146,24 @@ export default function initGame() {
             }
         ]);
 
+        card.onHover(() => {
+            if(card.flipped || lockBoard || isDialogOpen) return;
+            card.tween(card.scale, k.vec2(1.1, 1.1), 0.2, v => card.scale = v, k.easings.linear);
+        });
+
+        card.onHoverEnd(() => {
+            if(card.flipped || lockBoard || isDialogOpen) return;
+            card.tween(card.scale, k.vec2(1, 1), 0.2, v => card.scale = v, k.easings.linear);
+        });
+
         card.onClick(() => {
             if (isDialogOpen) return;
             if (lockBoard || card.flipped) return;
+
+
+            k.play(flipSounds[Math.floor(Math.random() * flipSounds.length)],{
+                volume: 0.5
+            });
 
             flipCard(card, true);
             card.flipped = true;
@@ -144,8 +180,17 @@ export default function initGame() {
 
                     const data = firstCard.cardData.data;
                     if (data) {
-                        setTimeout(() => emit(data), 1000);
+                        setTimeout(() => emit(data), 1500);
                     }
+
+                    setTimeout(() => {
+                        k.play("match", {
+                            volume: 0.5,
+                            speed: 1.2,
+                            detune: -150
+                        });
+                    }, 500);
+
 
                     if (matchedCount + 2 === shuffledCards.length) {
                         setTimeout(() => {
@@ -172,7 +217,7 @@ export default function initGame() {
         });
     }
 
-    function createDialogBox(dialogs) {
+    function createDialogBox(dialogs, onComplete = () => {}) {
         let currentDialogIndex = 0;
         isDialogOpen = true;
         let animationTimer = null;
@@ -217,6 +262,7 @@ export default function initGame() {
 
             if (currentDialogIndex >= dialogs.length) {
                 closeDialog();
+                onComplete();
                 return;
             }
 
@@ -269,14 +315,20 @@ export default function initGame() {
         const currentLevel = levels[currentLevelIndex];
 
         if (currentLevel.dialogs && currentLevel.dialogs.length > 0) {
-            createDialogBox(currentLevel.dialogs);
+            createDialogBox(currentLevel.dialogs, () => {
+                spawnAllCardsForLevel();
+            });
+        }else{
+            spawnAllCardsForLevel();
         }
 
         firstCard = null;
         secondCard = null;
         lockBoard = false;
         matchedCount = 0;
+    }
 
+    function spawnAllCardsForLevel(){
         shuffledCards = getCurrentLevelCards();
 
         // Cargar sprites únicos para este nivel
