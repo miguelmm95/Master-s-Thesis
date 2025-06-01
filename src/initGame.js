@@ -155,6 +155,8 @@ export default function initGame() {
     function createDialogBox(dialogs) {
         let currentDialogIndex = 0;
         isDialogOpen = true;
+        let animationTimer = null;
+        let isAnimating = false;
 
         const dialogBox = k.add([
             k.rect(k.width() - 40, 150),
@@ -183,45 +185,63 @@ export default function initGame() {
             k.z(101),
         ]);
 
+        function cleanup() {
+            if (animationTimer) {
+                clearInterval(animationTimer);
+                animationTimer = null;
+            }
+        }
+
         function showCurrentDialog() {
+            cleanup();
+
             if (currentDialogIndex >= dialogs.length) {
                 closeDialog();
                 return;
             }
 
             const currentDialog = dialogs[currentDialogIndex];
-            speakerText.text = currentDialog.speaker + ": ";
+            speakerText.text = currentDialog.speaker + ":";
             dialogText.text = "";
 
             let i = 0;
             const speed = 30;
-            const timer = setInterval(() => {
+            isAnimating = true;
+
+            animationTimer = setInterval(() => {
                 if (i < currentDialog.text.length) {
                     dialogText.text += currentDialog.text.charAt(i);
                     i++;
-                }else{
-                    clearInterval(timer);
+                } else {
+                    clearInterval(animationTimer);
+                    animationTimer = null;
+                    isAnimating = false;
                 }
             }, speed);
         }
 
         function closeDialog() {
+            cleanup();
             dialogBox.destroy();
             speakerText.destroy();
             dialogText.destroy();
             isDialogOpen = false;
         }
 
-        showCurrentDialog();
-
         dialogBox.onClick(() => {
-            currentDialogIndex++;
-            showCurrentDialog();
+            if (isAnimating) {
+                cleanup();
+                dialogText.text = dialogs[currentDialogIndex].text;
+                isAnimating = false;
+            } else {
+                currentDialogIndex++;
+                showCurrentDialog();
+            }
         });
 
-        // --- Evitar que el clic se propague al juego debajo ---
-        dialogBox.onClick(() => {});
+        showCurrentDialog();
     }
+
 
     function startLevel() {
         k.destroyAll("card");
