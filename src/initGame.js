@@ -25,6 +25,11 @@ export default function initGame() {
             id: "aboutMe",
             cards: [
                 { src: "./assets/images/card1.png", data: "aboutMe" },
+            ],
+            dialogs: [
+                { text: "TO DO 1 About Me", speaker: "Sistema" },
+                { text: "TO DO 2 About Me", speaker: "Guía" },
+                { text: "TO DO 3 About Me", speaker: "Sistema" }
             ]
         },
         {
@@ -34,6 +39,11 @@ export default function initGame() {
                 { src: "./assets/images/card2.png", data: "IT" },
                 { src: "./assets/images/card3.png", data: "bachelor" },
                 { src: "./assets/images/card4.png", data: "master" },
+            ],
+            dialogs: [
+                { text: "TO DO 1 Studies", speaker: "Sistema" },
+                { text: "TO DO 2 Studies", speaker: "Guía" },
+                { text: "TO DO 3 Studies", speaker: "Sistema" }
             ]
         },
         {
@@ -45,6 +55,11 @@ export default function initGame() {
                 { src: "./assets/images/card4.png", data: "OWN" },
                 { src: "./assets/images/card5.png", data: "aeme" },
                 { src: "./assets/images/card6.png", data: "hechiceria" },
+            ],
+            dialogs: [
+                { text: "TO DO 1 Experience", speaker: "Sistema" },
+                { text: "TO DO 2 Experience", speaker: "Guía" },
+                { text: "TO DO 3 Experience", speaker: "Sistema" }
             ]
         },
         {
@@ -56,6 +71,11 @@ export default function initGame() {
                 { src: "./assets/images/card4.png", data: "spring" },
                 { src: "./assets/images/card5.png", data: "laravel" },
                 { src: "./assets/images/card6.png", data: "codeLanguages" },
+            ],
+            dialogs: [
+                { text: "TO DO 1 Skills", speaker: "Sistema" },
+                { text: "TO DO 2 Skills", speaker: "Guía" },
+                { text: "TO DO 3 Skills", speaker: "Sistema" }
             ]
         }
     ];
@@ -246,20 +266,11 @@ export default function initGame() {
     function startLevel() {
         k.destroyAll("card");
 
-        createDialogBox([
-            {
-                text: "Bienvenido a mi portafolio interactivo.",
-                speaker: "Sistema"
-            },
-            {
-                text: "Encuentra los pares de cartas para descubrir más sobre mí.",
-                speaker: "Guía"
-            },
-            {
-                text: "¡Haz clic para comenzar!",
-                speaker: "Sistema"
-            }
-        ]);
+        const currentLevel = levels[currentLevelIndex];
+
+        if (currentLevel.dialogs && currentLevel.dialogs.length > 0) {
+            createDialogBox(currentLevel.dialogs);
+        }
 
         firstCard = null;
         secondCard = null;
