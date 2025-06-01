@@ -18,6 +18,7 @@ export default function initGame() {
     let matchedCount = 0;
     let shuffledCards = [];
     let levelComplete = false;
+    let isDialogOpen = false;
 
     const levels = [
         {
@@ -105,6 +106,7 @@ export default function initGame() {
         ]);
 
         card.onClick(() => {
+            if (isDialogOpen) return;
             if (lockBoard || card.flipped) return;
 
             flipCard(card, true);
@@ -150,8 +152,94 @@ export default function initGame() {
         });
     }
 
+    function createDialogBox(dialogs) {
+        let currentDialogIndex = 0;
+        isDialogOpen = true;
+
+        const dialogBox = k.add([
+            k.rect(k.width() - 40, 150),
+            k.pos(20, k.height() - 170),
+            k.color(0, 0, 0),
+            k.outline(4, k.WHITE),
+            k.fixed(),
+            k.z(100),
+            k.area(),
+            "dialogBox"
+        ]);
+
+        const speakerText = k.add([
+            k.text("", { size: 24 }),
+            k.pos(30, k.height() - 150),
+            k.color(k.RED),
+            k.fixed(),
+            k.z(101),
+        ]);
+
+        const dialogText = k.add([
+            k.text("", { size: 20 }),
+            k.pos(30, k.height() - 120),
+            k.color(k.WHITE),
+            k.fixed(),
+            k.z(101),
+        ]);
+
+        function showCurrentDialog() {
+            if (currentDialogIndex >= dialogs.length) {
+                closeDialog();
+                return;
+            }
+
+            const currentDialog = dialogs[currentDialogIndex];
+            speakerText.text = currentDialog.speaker + ": ";
+            dialogText.text = "";
+
+            let i = 0;
+            const speed = 30;
+            const timer = setInterval(() => {
+                if (i < currentDialog.text.length) {
+                    dialogText.text += currentDialog.text.charAt(i);
+                    i++;
+                }else{
+                    clearInterval(timer);
+                }
+            }, speed);
+        }
+
+        function closeDialog() {
+            dialogBox.destroy();
+            speakerText.destroy();
+            dialogText.destroy();
+            isDialogOpen = false;
+        }
+
+        showCurrentDialog();
+
+        dialogBox.onClick(() => {
+            currentDialogIndex++;
+            showCurrentDialog();
+        });
+
+        // --- Evitar que el clic se propague al juego debajo ---
+        dialogBox.onClick(() => {});
+    }
+
     function startLevel() {
         k.destroyAll("card");
+
+        createDialogBox([
+            {
+                text: "Bienvenido a mi portafolio interactivo.",
+                speaker: "Sistema"
+            },
+            {
+                text: "Encuentra los pares de cartas para descubrir más sobre mí.",
+                speaker: "Guía"
+            },
+            {
+                text: "¡Haz clic para comenzar!",
+                speaker: "Sistema"
+            }
+        ]);
 
         firstCard = null;
         secondCard = null;
