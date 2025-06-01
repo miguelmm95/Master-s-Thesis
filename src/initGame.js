@@ -92,6 +92,7 @@ export default function initGame() {
     k.loadSound("match", "./assets/sounds/match.mp3");
 
     const flipSounds = ["cardFlip1", "cardFlip2"];
+    const shuffleSounds = ["shuffleCards1", "shuffleCards2"];
 
     // --- Utilidades ---
     function getCurrentLevelCards() {
@@ -131,12 +132,12 @@ export default function initGame() {
         }, 200);
     }
 
-    function spawnCard(x, y, cardData) {
+    function spawnCard(x, y, cardData, delay = 0) {
         const card = k.add([
             k.sprite("cardBack"),
-            k.pos(x, y),
+            k.pos(x, y + 300),
             k.area(),
-            k.scale(1),
+            k.scale(0),
             k.timer(),
             "card",
             {
@@ -145,6 +146,16 @@ export default function initGame() {
                 cardData,
             }
         ]);
+
+        card.wait(delay). then(() => {
+            // Tween de posición
+            const fromPos = k.vec2(card.pos.x, card.pos.y); // posición actual (desplazada abajo)
+            const toPos = k.vec2(x, y); // posición destino
+            card.tween(fromPos, toPos, 0.4, (v) => card.pos = v, k.easings.easeOutBack);
+
+            // Tween de escala
+            card.tween(k.vec2(0, 0), k.vec2(1, 1), 0.4, (v) => card.scale = v, k.easings.easeOutBack);
+        });
 
         card.onHover(() => {
             if(card.flipped || lockBoard || isDialogOpen) return;
@@ -308,6 +319,41 @@ export default function initGame() {
         showCurrentDialog();
     }
 
+    function MainMenu() {
+        k.destroyAll();
+
+        k.add([
+            k.text("Titulo del Juego", { size: 48 }),
+            k.pos(k.width() / 2, k.height() / 2 - 100),
+            k.anchor("center"),
+            k.color(k.WHITE),
+            "menuUI"
+        ]);
+
+        const startButton = k.add([
+            k.rect(200, 60, { radius: 12 }),
+            k.pos(k.width() / 2, k.height() / 2),
+            k.anchor("center"),
+            k.color(k.GREEN),
+            k.area(),
+            k.z(10),
+            "menuUI"
+        ]);
+        k.add([
+            k.text("Jugar", { size: 24 }),
+            k.pos(startButton.pos.x, startButton.pos.y),
+            k.anchor("center"),
+            k.color(k.WHITE),
+            k.z(11),
+            "menuUI"
+        ]);
+
+        startButton.onClick(() => {
+            k.destroyAll("menuUI");
+            startLevel();
+        });
+    }
+
 
     function startLevel() {
         k.destroyAll("card");
@@ -329,6 +375,11 @@ export default function initGame() {
     }
 
     function spawnAllCardsForLevel(){
+
+        k.play(shuffleSounds[Math.floor(Math.random() * shuffleSounds.length)],{
+            volume: 0.5
+        });
+
         shuffledCards = getCurrentLevelCards();
 
         // Cargar sprites únicos para este nivel
@@ -344,20 +395,23 @@ export default function initGame() {
         const startY = (k.height() - (numRow * cardHeight + (numRow - 1) * gapY)) / 2;
 
         let index = 0;
+        let delay = 0;
         for (let row = 0; row < numRow; row++) {
             for (let col = 0; col < numCol; col++) {
                 if (index >= shuffledCards.length) break;
 
                 const x = startX + col * (cardWidth + gapX);
                 const y = startY + row * (cardHeight + gapY);
-                spawnCard(x, y, shuffledCards[index]);
+                spawnCard(x, y, shuffledCards[index], delay);
+                delay += 0.05;
                 index++;
             }
         }
     }
 
     // --- Iniciar nivel ---
-    startLevel();
+    //startLevel();
+    MainMenu();
     
     on("levelComplete", () => {
         levelComplete = true;
