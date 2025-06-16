@@ -31,7 +31,8 @@
 }
 
 .about-text p {
-  margin: 0;
+  margin: 0 0 1.5rem 0;
   font-size: 1rem;
   line-height: 1.6;
+  text-align: justify;
 }

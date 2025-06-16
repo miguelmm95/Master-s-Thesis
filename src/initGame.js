@@ -28,9 +28,18 @@ export default function initGame() {
                 { src: "./assets/images/cards/aboutMeCard.png", data: "aboutMe" },
             ],
             dialogs: [
-                { text: "TO DO 1 About Me", speaker: "Sistema" },
-                { text: "TO DO 2 About Me", speaker: "Guía" },
-                { text: "TO DO 3 About Me", speaker: "Sistema" }
+                { text: "*Finding the perfect candidate... a quest as elusive as a shadow in the fog.*", speaker: "" },
+                { text: "*Countless résumés with lifeless templates, countless GitHub pages, echoing the same tired lines—none held what you sought.*", speaker: "" },
+                { text: "*But whispers reached your ears... of a seer who sees beyond the veil, who finds those hidden by fate itself.*", speaker: "" },
+                { text: "*And so, with hope flickering like a dying flame, you knocked on her door.*", speaker: "" },
+                { text: "*This is the day... your search ends.*", speaker: "" },
+                { text: "Hi... I'm looking for someone.", speaker: "You:" },
+                { text: "The threads of fate are many... but tell me, seeker what kind of person does your heart and company truly need?", speaker: "Seer:" },
+                { text: "I’m looking for someone trustworthy and hard-working, a fast learner who works well with others.", speaker: "You:" },
+                { text: "They should have solid programming skills, along with knowledge of networking, and experience in game design and development.", speaker: "You:" },
+                { text: "Hmm... a rare combination indeed. But the cosmos may yet align in your favor...", speaker: "Seer:" },
+                { text: "*The seer reaches for an old, weathered deck. With her eyes closed and a barely audible whisper, she throws two cards onto the table*" , speaker: "" },
+                { text: "Go ahead.", speaker: "Seer:" },
             ]
         },
         {
@@ -291,16 +300,16 @@ export default function initGame() {
         ]);
 
         const speakerText = k.add([
-            k.text("", { size: 24 }),
-            k.pos(30, k.height() - 150),
+            k.text("", { size: 30 }),
+            k.pos(35, k.height() - 150),
             k.color(k.RED),
             k.fixed(),
             k.z(101),
         ]);
 
         const dialogText = k.add([
-            k.text("", { size: 20 }),
-            k.pos(30, k.height() - 120),
+            k.text("", { size: 25 }),
+            k.pos(30, k.height() - 100),
             k.color(k.WHITE),
             k.fixed(),
             k.z(101),
@@ -323,7 +332,7 @@ export default function initGame() {
             }
 
             const currentDialog = dialogs[currentDialogIndex];
-            speakerText.text = currentDialog.speaker + ":";
+            speakerText.text = currentDialog.speaker;
             dialogText.text = "";
 
             let i = 0;
