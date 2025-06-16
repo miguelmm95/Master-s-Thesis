@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function ESOModal({ visible, onClose }) {
+export default function TFMModal({ visible, onClose }) {
   if (!visible) return null;
 
   return (
@@ -8,7 +8,7 @@ export default function ESOModal({ visible, onClose }) {
       <div className="modal-wrapper" onClick={(e) => e.stopPropagation()}>
         <div className="modal-content-xl">
           <div className="modal-header">
-            <h5 className="modal-title">Obligatory Secondary Education</h5>
+            <h5 className="modal-title">Master's Thesis</h5>
             <button className="btn-close" onClick={onClose} aria-label="Close">&times;</button>
           </div>
           <div className="modal-body">

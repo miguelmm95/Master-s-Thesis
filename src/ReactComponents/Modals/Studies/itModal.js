@@ -1,4 +1,5 @@
 import React from 'react';
+import './studiesModal.css';
 
 export default function ITModal({ visible, onClose }) {
   if (!visible) return null;
@@ -8,11 +9,14 @@ export default function ITModal({ visible, onClose }) {
       <div className="modal-wrapper" onClick={(e) => e.stopPropagation()}>
         <div className="modal-content-xl">
           <div className="modal-header">
-            <h5 className="modal-title">Administration of microcomputer systems and networks</h5>
+            <h5 className="modal-title">Studies</h5>
             <button className="btn-close" onClick={onClose} aria-label="Close">&times;</button>
           </div>
           <div className="modal-body">
-            <p>TO DO</p>
+            <div className="study-entry">
+              <h2 className="study-title">Higher Technician Degree in Microcomputer Systems and Networks</h2>
+              <h3 className="study-dates">2015 - 2017</h3>
+            </div>
           </div>
         </div>
       </div>

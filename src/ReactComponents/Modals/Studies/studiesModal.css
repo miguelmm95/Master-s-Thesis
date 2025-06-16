@@ -1,0 +1,14 @@
+.study-entry {
+  margin-bottom: 1.5rem;
+}
+
+.study-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+}
+
+.study-dates {
+  font-size: 1rem;
+  color: #666;
+}

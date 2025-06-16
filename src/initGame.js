@@ -6,8 +6,8 @@ export default function initGame() {
     const k = initKaplay();
 
     // --- Constantes globales ---
-    const cardWidth = 64;
-    const cardHeight = 64;
+    const cardWidth = 125;
+    const cardHeight = 190;
     const gapX = 30;
     const gapY = 30;
 
@@ -25,7 +25,7 @@ export default function initGame() {
         {
             id: "aboutMe",
             cards: [
-                { src: "./assets/images/card1.png", data: "aboutMe" },
+                { src: "./assets/images/cards/aboutMeCard.png", data: "aboutMe" },
             ],
             dialogs: [
                 { text: "TO DO 1 About Me", speaker: "Sistema" },
@@ -36,9 +36,8 @@ export default function initGame() {
         {
             id: "studies",
             cards: [
-                { src: "./assets/images/card1.png", data: "ESO" },
-                { src: "./assets/images/card2.png", data: "IT" },
-                { src: "./assets/images/card3.png", data: "bachelor" },
+                { src: "./assets/images/cards/redesCard.png", data: "IT" },
+                { src: "./assets/images/cards/bachelorCard.png", data: "bachelor" },
                 { src: "./assets/images/card4.png", data: "master" },
             ],
             dialogs: [
@@ -66,11 +65,12 @@ export default function initGame() {
         {
             id: "skills",
             cards: [
-                { src: "./assets/images/card1.png", data: "unity" },
-                { src: "./assets/images/card2.png", data: "ue" },
-                { src: "./assets/images/card3.png", data: "react" },
-                { src: "./assets/images/card4.png", data: "spring" },
-                { src: "./assets/images/card5.png", data: "laravel" },
+                { src: "./assets/images/cards/unityCard.png", data: "unity" },
+                { src: "./assets/images/cards/unrealCard.png", data: "ue" },
+                { src: "./assets/images/cards/reactCard.png", data: "react" },
+                { src: "./assets/images/cards/springCard.png", data: "spring" },
+                { src: "./assets/images/cards/laravelCard.png", data: "laravel" },
+                {  src: "./assets/images/cards/azureCard.png", data: "azure" },
                 { src: "./assets/images/card6.png", data: "codeLanguages" },
             ],
             dialogs: [
@@ -78,13 +78,49 @@ export default function initGame() {
                 { text: "TO DO 2 Skills", speaker: "Guía" },
                 { text: "TO DO 3 Skills", speaker: "Sistema" }
             ]
+        },
+        {
+            id: "projects",
+            cards: [
+                { src: "./assets/images/cards/thumusCard.png", data: "thumus" },
+                { src: "./assets/images/cards/candyCard.png", data: "candy" },
+                { src: "./assets/images/cards/sh2Card.png", data: "sh2" },
+                { src: "./assets/images/cards/tfgCard.png", data: "tfg" },
+                { src: "./assets/images/cards/tfmCard.png", data: "tfm" },
+            ],
+            dialogs: [
+                { text: "TO DO 1 Projects", speaker: "Sistema" },
+                { text: "TO DO 2 Projects", speaker: "Guía" },
+                { text: "TO DO 3 Projects", speaker: "Sistema" }
+            ]
+        },
+        {
+            id: "contact",
+            cards: [
+                { src: "./assets/images/cards/twitterCard.png", data: "twitter" },
+                { src: "./assets/images/cards/githubCard.png", data: "github" },
+                { src: "./assets/images/cards/linkedinCard.png", data: "linkedin" },
+                { src: "./assets/images/cards/itchioCard.png", data: "itchio" },
+            ],
+            dialogs: [
+                { text: "TO DO 1 Contact", speaker: "Sistema" },
+                { text: "TO DO 2 Contact", speaker: "Guía" },
+                { text: "TO DO 3 Contact", speaker: "Sistema" }
+            ]
         }
     ];
 
     // --- Cargar recursos ---
-    k.loadSprite("background", "./logo192.png");
-    k.loadSprite("cardBack", "./assets/images/cardback.png");
-    k.add([k.sprite("background"), k.pos(0, 0), k.layer("bg")]);
+    k.loadSprite("background", "/assets/images/background.png").then(() => {
+        k.add([
+            k.sprite("background"),
+            k.pos(0, 0),
+            k.layer("bg"),
+            k.z(-10)
+        ]);
+    });
+    k.loadSprite("cardBack", "./assets/images/cards/cardback.png");
+
 
     k.loadSound("cardFlip1", "./assets/sounds/flipCard1.mp3");
     k.loadSound("cardFlip2", "./assets/sounds/flipCard2.mp3");
@@ -93,6 +129,12 @@ export default function initGame() {
     k.loadSound("match", "./assets/sounds/match.mp3");
 
     const flipSounds = ["cardFlip1", "cardFlip2"];
+
+    // k.add([
+    //     k.sprite("background"),
+    //     k.pos(0, 0),
+    //     k.layer("bg")
+    // ]);
 
     // --- Utilidades ---
     function getCurrentLevelCards() {

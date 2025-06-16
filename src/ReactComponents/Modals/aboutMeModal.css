@@ -1,0 +1,37 @@
+.modal-header-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
+.profile-image {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.profile-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.profile-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+}
+
+.profile-subtitle {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 1.5rem; /* Espacio entre subtítulo y el texto del about me */
+}
+
+.about-text p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.6;
+}
