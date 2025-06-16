@@ -1,4 +1,5 @@
 import React from 'react';
+import './experiencesModal.css';
 
 export default function CanteraModal({ visible, onClose }) {
   if (!visible) return null;
@@ -12,7 +13,10 @@ export default function CanteraModal({ visible, onClose }) {
             <button className="btn-close" onClick={onClose} aria-label="Close">&times;</button>
           </div>
           <div className="modal-body">
-            <p>TO DO</p>
+            <div className="experience-entry">
+              <h2 className="experience-title">Programming Teacher - Cantera de Empresas</h2>
+              <h3 className="experience-dates">February 2024 - April 2024</h3>
+            </div>
           </div>
         </div>
       </div>

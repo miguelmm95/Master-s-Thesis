@@ -1,4 +1,5 @@
 import React from 'react';
+import './experiencesModal.css';
 
 export default function HechiceriaModal({ visible, onClose }) {
   if (!visible) return null;
@@ -12,7 +13,10 @@ export default function HechiceriaModal({ visible, onClose }) {
             <button className="btn-close" onClick={onClose} aria-label="Close">&times;</button>
           </div>
           <div className="modal-body">
-            <p>TO DO</p>
+            <div className="experience-entry">
+              <h2 className="experience-title">Software developer with Unreal Engine - Hechicer.ia</h2>
+              <h3 className="experience-dates">April 2024 - Current</h3>
+            </div>
           </div>
         </div>
       </div>
