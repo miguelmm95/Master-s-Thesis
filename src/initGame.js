@@ -47,7 +47,7 @@ export default function initGame() {
             cards: [
                 { src: "./assets/images/cards/redesCard.png", data: "IT" },
                 { src: "./assets/images/cards/bachelorCard.png", data: "bachelor" },
-                { src: "./assets/images/card4.png", data: "master" },
+                { src: "./assets/images/cards/masterCard.png", data: "master" },
             ],
             dialogs: [
                 { text: "TO DO 1 Studies", speaker: "Sistema" },
@@ -58,12 +58,12 @@ export default function initGame() {
         {
             id: "experience",
             cards: [
-                { src: "./assets/images/card1.png", data: "iislafe" },
-                { src: "./assets/images/card2.png", data: "mindTrips" },
-                { src: "./assets/images/card3.png", data: "cantera" },
-                { src: "./assets/images/card4.png", data: "OWN" },
-                { src: "./assets/images/card5.png", data: "aeme" },
-                { src: "./assets/images/card6.png", data: "hechiceria" },
+                { src: "./assets/images/cards/iislafeCard.png", data: "iislafe" },
+                { src: "./assets/images/cards/mindCard.png", data: "mindTrips" },
+                { src: "./assets/images/cards/canteraCard.png", data: "cantera" },
+                { src: "./assets/images/cards/ownCard.png", data: "OWN" },
+                { src: "./assets/images/cards/aemeCard.png", data: "aeme" },
+                { src: "./assets/images/cards/hechiceriaCard.png", data: "hechiceria" },
             ],
             dialogs: [
                 { text: "TO DO 1 Experience", speaker: "Sistema" },
@@ -80,7 +80,7 @@ export default function initGame() {
                 { src: "./assets/images/cards/springCard.png", data: "spring" },
                 { src: "./assets/images/cards/laravelCard.png", data: "laravel" },
                 {  src: "./assets/images/cards/azureCard.png", data: "azure" },
-                { src: "./assets/images/card6.png", data: "codeLanguages" },
+                { src: "./assets/images/cards/codeCard.png", data: "codeLanguages" },
             ],
             dialogs: [
                 { text: "TO DO 1 Skills", speaker: "Sistema" },
@@ -374,11 +374,19 @@ export default function initGame() {
     }
 
     function MainMenu() {
-        k.destroyAll();
+        // k.destroyAll();
 
         k.add([
-            k.text("Titulo del Juego", { size: 48 }),
-            k.pos(k.width() / 2, k.height() / 2 - 100),
+            k.text("Prospectus", { size: 48 }),
+            k.pos(k.width() / 2, k.height() / 2 - 110),
+            k.anchor("center"),
+            k.color(k.WHITE),
+            "menuUI"
+        ]);
+
+                k.add([
+            k.text("-- an interactive portfolio --", { size: 30 }),
+            k.pos(k.width() / 2, k.height() / 2 - 60),
             k.anchor("center"),
             k.color(k.WHITE),
             "menuUI"
@@ -394,7 +402,7 @@ export default function initGame() {
             "menuUI"
         ]);
         k.add([
-            k.text("Jugar", { size: 24 }),
+            k.text("Start", { size: 24 }),
             k.pos(startButton.pos.x, startButton.pos.y),
             k.anchor("center"),
             k.color(k.WHITE),
@@ -407,6 +415,85 @@ export default function initGame() {
             startLevel();
         });
     }
+
+    function EndScreen() {
+        k.destroyAll();
+
+        k.add([
+            k.sprite("background"),
+            k.pos(0, 0),
+            k.layer("bg"),
+            k.z(-10)
+        ]);
+
+        k.add([
+            k.text("Thank you for playing!", { size: 42 }),
+            k.pos(k.width() / 2, k.height() / 2 - 110),
+            k.anchor("center"),
+            k.color(k.WHITE),
+            "endUI"
+        ]);
+
+        k.add([
+            k.text("I hope you enjoyed this interactive portfolio.", { size: 24 }),
+            k.pos(k.width() / 2, k.height() / 2 - 50),
+            k.anchor("center"),
+            k.color(k.WHITE),
+            "endUI"
+        ]);
+
+        const restartButton = k.add([
+            k.rect(220, 60, { radius: 12 }),
+            k.pos(k.width() / 2, k.height() / 2 + 40),
+            k.anchor("center"),
+            k.color(k.BLUE),
+            k.area(),
+            k.z(10),
+            "endUI"
+        ]);
+
+        k.add([
+            k.text("Restart", { size: 26 }),
+            k.pos(restartButton.pos.x, restartButton.pos.y),
+            k.anchor("center"),
+            k.color(k.WHITE),
+            k.z(11),
+            "endUI"
+        ]);
+
+        restartButton.onClick(() => {
+            k.destroyAll("endUI");
+            currentLevelIndex = 0;
+            resetGame();
+        });
+    }
+
+    function resetGame() {
+
+        k.destroyAll();
+
+
+        k.add([
+            k.sprite("background"),
+            k.pos(0, 0),
+            k.layer("bg"),
+            k.z(-10)
+        ]);
+
+
+        currentLevelIndex = 0;
+        firstCard = null;
+        secondCard = null;
+        lockBoard = false;
+        matchedCount = 0;
+        shuffledCards = [];
+        levelComplete = false;
+        isDialogOpen = false;
+        isSpawningCards = false;
+
+        MainMenu();
+    }
+
 
 
     function startLevel() {
@@ -492,7 +579,7 @@ export default function initGame() {
                 currentLevelIndex++;
                 startLevel();
             }else {
-                console.log("Juego completado");
+                EndScreen();
             }
         }else{
             lockBoard = false;
