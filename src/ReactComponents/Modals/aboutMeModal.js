@@ -10,39 +10,41 @@ export default function AboutMeModal({ visible, onClose }) {
         <div className="modal-content-xl p-6">
           <div className="modal-header mb-4 flex justify-between items-center">
             <h5 className="modal-title text-2xl font-semibold">About me</h5>
-            <button className="btn-close text-2xl" onClick={onClose} aria-label="Cerrar">&times;</button>
+            <button className="btn-close text-2xl" onClick={onClose} aria-label="Close">&times;</button>
           </div>
 
           <div className="modal-body">
             <div className="modal-header-row">
               <img
                 src="/assets/images/profile.jpeg"
-                alt="Foto de perfil"
+                alt="Profile picture"
                 className="profile-image"
               />
               <div className="profile-text">
                 <h2 className="profile-name">Miguel Martínez Martínez</h2>
-                <h3 className="profile-subtitle">Fullstack Developer | Videogame Designer & Developer | IT</h3>
+                <h3 className="profile-subtitle">Fullstack Developer | Game Designer & Developer | IT Specialist</h3>
                 <div className="about-text">
                   <p>
-                    Hi, I'm Miguel, a 29-year-old from Valencia, Spain. 
-                    I’ve been passionate about technology since I was a child, 
-                    and I’ve turned that fascination into a career focused on creating digital experiences that combine creativity with technical skill. 
-                    Over the years, I have explored software development, systems engineering, and video game design, 
-                    always aiming to deliver innovative and practical solutions.
+                    Hello! I'm Miguel, a 29-year-old developer from Valencia, Spain, a native <strong>Spanish and Valencian/Catalan speaker</strong> with <strong>professional English fluency</strong>.
                   </p>
                   <p>
-                    In my free time, I enjoy playing video games, reading, especially fantasy and science fiction. Besides that, 
-                    I’m always eager to keep learning and exploring the things I’m passionate about.
+                    My passion for technology began in childhood and evolved into expertise across software development, 
+                    systems engineering, and game design. I specialize in creating digital experiences that blend technical 
+                    precision with creative vision - like this interactive portfolio you're exploring!
                   </p>
+                  <p>
+                    When I'm not coding, you'll find me playing videogames, reading sci-fi/fantasy novels 
+                    or doing some outdoor activity.
+                  </p>
+                  <div className="badge-container">
+                    <span className="badge">Spanish (Native)</span>
+                    <span className="badge">Valencian/Catalan (Native)</span>
+                    <span className="badge">English (B2)</span>
+                  </div>
                 </div>
               </div>
-              
             </div>
-            
-            
           </div>
-
         </div>
       </div>
     </div>

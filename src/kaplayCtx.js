@@ -6,7 +6,7 @@ export default function initKaplay() {
         height: 1080,
         letterbox: true,        //Responsibe
         global: false,
-        debug: true,       //Debug mode TODO: voler a ponerlo en falso en la fase de producción
+        debug: false,       //Debug mode TODO: voler a ponerlo en falso en la fase de producción
         debugKey: "f1",
         canvas: document.getElementById("game"),
         pixelDensity: devicePixelRatio,

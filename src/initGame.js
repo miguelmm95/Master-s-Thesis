@@ -374,7 +374,6 @@ export default function initGame() {
     }
 
     function MainMenu() {
-        // k.destroyAll();
 
         k.add([
             k.text("Prospectus", { size: 48 }),

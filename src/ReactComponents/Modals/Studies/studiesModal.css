@@ -12,3 +12,10 @@
   font-size: 1rem;
   color: #666;
 }
+
+.study-text p {
+  margin: 0 0 1.5rem 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  text-align: justify;
+}
