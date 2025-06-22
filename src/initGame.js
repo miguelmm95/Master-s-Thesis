@@ -239,7 +239,6 @@ export default function initGame() {
                 if (firstCard.cardData.src === secondCard.cardData.src) {
 
                     //Cartas coinciden
-                    lockBoard = true;
 
                     const data = firstCard.cardData.data;
                     if (data) {
@@ -259,6 +258,7 @@ export default function initGame() {
                         setTimeout(() => {
                             emit(data);
                             emit("levelComplete", levels[currentLevelIndex].id);
+                            resetTurn();
                         }, 1000);
                     }else{
                         matchedCount += 2;
