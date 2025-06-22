@@ -239,6 +239,7 @@ export default function initGame() {
                 if (firstCard.cardData.src === secondCard.cardData.src) {
 
                     //Cartas coinciden
+                    lockBoard = true;
 
                     const data = firstCard.cardData.data;
                     if (data) {
