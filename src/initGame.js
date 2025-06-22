@@ -128,7 +128,7 @@ export default function initGame() {
             k.z(-10)
         ]);
     });
-    k.loadSprite("cardBack", "./assets/images/cards/cardback.png");
+    k.loadSprite("cardBack", "./assets/images/cards/cardBack.png");
 
 
     k.loadSound("cardFlip1", "./assets/sounds/flipCard1.mp3");
