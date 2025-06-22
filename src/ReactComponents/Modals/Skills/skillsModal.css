@@ -1,0 +1,21 @@
+.technical-skills {
+  margin: 1.2rem 0;
+  padding-left: 1.8rem;
+  list-style-type: none;
+}
+
+.technical-skills li {
+  margin-bottom: 0.8rem;
+  position: relative;
+  line-height: 1.7;
+}
+
+.technical-skills li:before {
+  content: "•";
+  color: #00b4d8;
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1.5em;
+  position: absolute;
+}

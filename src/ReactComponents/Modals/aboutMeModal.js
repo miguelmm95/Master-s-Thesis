@@ -33,8 +33,8 @@ export default function AboutMeModal({ visible, onClose }) {
                     precision with creative vision - like this interactive portfolio you're exploring!
                   </p>
                   <p>
-                    When I'm not coding, you'll find me playing videogames, reading sci-fi/fantasy novels 
-                    or doing some outdoor activity.
+                    When I'm not coding, you'll find me playing videogames, reading sci-fi/fantasy novels, 
+                    doing some outdoor activity or playing the Pokemon TCG with friends.
                   </p>
                   <div className="badge-container">
                     <span className="badge">Spanish (Native)</span>

@@ -46,6 +46,16 @@
   cursor: pointer;
 }
 
+.entry {
+  margin-bottom: 1.5rem;
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+}
+
 .badge-container {
   display: flex;
   gap: 10px;
