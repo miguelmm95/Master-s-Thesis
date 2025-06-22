@@ -257,7 +257,7 @@ export default function initGame() {
                             resetTurn(); 
                         }
 
-                    }, 700);
+                    }, 1000);
 
                 } else {
                     //Cartas no coinciden
