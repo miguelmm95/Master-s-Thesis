@@ -239,31 +239,25 @@ export default function initGame() {
                 if (firstCard.cardData.src === secondCard.cardData.src) {
 
                     //Cartas coinciden
-
                     const data = firstCard.cardData.data;
-                    if (data) {
-                        setTimeout(() => emit(data), 1500);
-                    }
-
+                    
                     setTimeout(() => {
-                        k.play("match", {
-                            volume: 0.35,
-                            speed: 1.2,
-                            detune: -150
-                        });
-                    }, 500);
+                        k.play("match", { volume: 0.35, speed: 1.2, detune: -150 });
 
+                        if (data) emit(data);
 
-                    if (matchedCount + 2 === shuffledCards.length) {
-                        setTimeout(() => {
-                            emit(data);
-                            emit("levelComplete", levels[currentLevelIndex].id);
-                            resetTurn();
-                        }, 1000);
-                    }else{
                         matchedCount += 2;
-                        resetTurn();
-                    }
+
+                        const levelFinished = matchedCount === shuffledCards.length;
+
+                        if (levelFinished) {
+                            emit("levelComplete", levels[currentLevelIndex].id);
+                            
+                        } else {
+                            resetTurn(); 
+                        }
+
+                    }, 700);
 
                 } else {
                     //Cartas no coinciden
