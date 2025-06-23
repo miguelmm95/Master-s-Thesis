@@ -161,14 +161,14 @@ export default function initGame() {
     function flipCard(card, toFront) {
         const flipOut = () => card.tween(
             k.vec2(1, 1), 
-            k.vec2(0, 1), 
+            k.vec2(0, 1.35), 
             0.2, 
             v => card.scale = v, 
             k.easings.linear
         );
 
         const flipIn = () => card.tween(
-            k.vec2(0, 1), 
+            k.vec2(0, 1.35), 
             k.vec2(1, 1), 
             0.2, 
             v => card.scale = v, 
@@ -183,12 +183,23 @@ export default function initGame() {
         }, 200);
     }
 
+    function centerCard(card, width, height) {
+        card.pos.x += width / 2;
+        card.pos.y += height / 2;
+    }
+
+    
+
     function spawnCard(x, y, cardData, delay = 0) {
+        const randomAngle = (Math.random() * 20) - 10;
+
         const card = k.add([
             k.sprite("cardBack"),
-            k.pos(x, y + 300),
+            k.pos(x + cardWidth / 2, y + cardHeight / 2),
             k.area(),
             k.scale(0),
+            //k.origin("center"),
+            k.rotate(randomAngle),
             k.timer(),
             "card",
             {
@@ -197,6 +208,8 @@ export default function initGame() {
                 cardData,
             }
         ]);
+
+        centerCard(card, cardWidth, cardHeight);
 
         card.wait(delay). then(() => {
             // Tween de posición

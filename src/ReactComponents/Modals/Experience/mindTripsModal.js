@@ -14,7 +14,7 @@ export default function MindTripsModal({ visible, onClose }) {
           </div>
           <div className="modal-body">
             <div className="experience-entry">
-              <h2 className="experience-title">Videogame prorgammer with Unreal Engine - <a href="https://mind-trips.com/es/" target="_blank" rel="noopener noreferrer">Mind Trips</a></h2>
+              <h2 className="experience-title">Videogame programmer with Unreal Engine - <a href="https://mind-trips.com/es/" target="_blank" rel="noopener noreferrer">Mind Trips</a></h2>
               <h3 className="experience-dates">May 2023 - July 2023</h3>
             </div>
             <div className="text">
