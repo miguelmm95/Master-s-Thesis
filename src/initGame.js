@@ -4,6 +4,7 @@ import { emit, on } from "./store";
 
 export default function initGame() {
     const k = initKaplay();
+    
 
     // --- Constantes globales ---
     const cardWidth = 125;
@@ -20,6 +21,7 @@ export default function initGame() {
     let levelComplete = false;
     let isDialogOpen = false;
     let isSpawningCards = false;
+    let isCredits = false;
 
     const levels = [
         {
@@ -110,12 +112,23 @@ export default function initGame() {
                 { src: "./assets/images/cards/githubCard.png", data: "github" },
                 { src: "./assets/images/cards/linkedinCard.png", data: "linkedin" },
                 { src: "./assets/images/cards/itchioCard.png", data: "itchio" },
+                { src: "./assets/images/cards/emailCard.png", data: "email" },
             ],
             dialogs: [
                 { text: "TO DO 1 Contact", speaker: "Sistema" },
                 { text: "TO DO 2 Contact", speaker: "Guía" },
                 { text: "TO DO 3 Contact", speaker: "Sistema" }
             ]
+        }
+    ];
+
+    const credits = [
+        {
+            id: "credits",
+            cards: [
+                { src: "./assets/images/cards/aboutMeCard.png", data: "mmm" },
+                { src: "./assets/images/cards/artistCard.png", data: "jmm" },
+            ],
         }
     ];
 
@@ -129,6 +142,8 @@ export default function initGame() {
         ]);
     });
     k.loadSprite("cardBack", "./assets/images/cards/cardBack.png");
+    k.loadSprite("cvSprite", "./assets/images/cvSprite.png");
+    k.loadSprite("rrssSprite", "./assets/images/rrssSprite.png");
 
 
     k.loadSound("cardFlip1", "./assets/sounds/flipCard1.mp3");
@@ -146,8 +161,8 @@ export default function initGame() {
     // ]);
 
     // --- Utilidades ---
-    function getCurrentLevelCards() {
-        return [...levels[currentLevelIndex].cards, ...levels[currentLevelIndex].cards]
+    function getCurrentLevelCards(level) {
+        return [...level[currentLevelIndex].cards, ...level[currentLevelIndex].cards]
             .sort(() => Math.random() - 0.5)
             .map(card => ({ ...card, id: Math.random() }));
     }
@@ -198,7 +213,6 @@ export default function initGame() {
             k.pos(x + cardWidth / 2, y + cardHeight / 2),
             k.area(),
             k.scale(0),
-            //k.origin("center"),
             k.rotate(randomAngle),
             k.timer(),
             "card",
@@ -403,7 +417,16 @@ export default function initGame() {
             k.rect(200, 60, { radius: 12 }),
             k.pos(k.width() / 2, k.height() / 2),
             k.anchor("center"),
-            k.color(k.GREEN),
+            k.color(k.BLUE),
+            k.area(),
+            k.z(10),
+            "menuUI"
+        ]);
+        const creditsButton = k.add([
+            k.rect(200, 60, { radius: 12 }),
+            k.pos(k.width() / 2, k.height() / 2 + 80),
+            k.anchor("center"),
+            k.color(k.BLUE),
             k.area(),
             k.z(10),
             "menuUI"
@@ -416,10 +439,53 @@ export default function initGame() {
             k.z(11),
             "menuUI"
         ]);
+        k.add([
+            k.text("Credits", { size: 24 }),
+            k.pos(creditsButton.pos.x, creditsButton.pos.y),
+            k.anchor("center"),
+            k.color(k.WHITE),
+            k.z(11),
+            "menuUI"
+        ]);
 
         startButton.onClick(() => {
             k.destroyAll("menuUI");
             startLevel();
+        });
+
+        creditsButton.onClick(() => {
+            k.destroyAll("menuUI");
+            isCredits = true;
+            showCredits();
+        });
+    }
+
+    function createFixedButtons(){
+
+        const cvSprite= k.add([
+            k.sprite("cvSprite"),
+            k.pos(k.width() - 100, 100),
+            k.scale(0.2),
+            k.area(),
+            k.z(201),
+            k.anchor("center"),
+            k.fixed(),
+            "fixedUI"
+        ]);
+
+        const rrssButton = k.add([
+            k.sprite("rrssSprite"),
+            k.pos(k.width() - 250, 100),
+            k.scale(0.2),
+            k.area(),
+            k.z(201),
+            k.anchor("center"),
+            k.fixed(),
+            "fixedUI"
+        ]);
+
+        cvSprite.onClick(() => {
+            console.log("CV Clicked");
         });
     }
 
@@ -522,10 +588,48 @@ export default function initGame() {
         matchedCount = 0;
     }
 
+    function showCredits() {
+        k.destroyAll("card");
+
+        const currentCredits = credits[0];
+        spawnAllCardsForLevel();
+
+        // Botón para volver al menú principal
+        const backButton = k.add([
+            k.rect(180, 50, { radius: 10 }),
+            k.pos(k.width() / 2, k.height() / 2 + 300),
+            k.anchor("center"),
+            k.color(k.BLUE),
+            k.area(),
+            k.z(10),
+            "creditsUI"
+        ]);
+        k.add([
+            k.text("Back", { size: 24 }),
+            k.pos(backButton.pos.x, backButton.pos.y),
+            k.anchor("center"),
+            k.color(k.WHITE),
+            k.z(11),
+            "creditsUI"
+        ]);
+        backButton.onClick(() => {
+            k.destroyAll("creditsUI");
+            k.destroyAll("card");
+            isCredits = false;
+            MainMenu();
+        });
+
+    }
+
     function spawnAllCardsForLevel(){
         isSpawningCards = true;
 
-        shuffledCards = getCurrentLevelCards();
+        if (isCredits){
+            shuffledCards = getCurrentLevelCards(credits);
+        }else{
+            shuffledCards = getCurrentLevelCards(levels);
+        }
+        
 
         // Cargar sprites únicos para este nivel
         for (const card of shuffledCards) {
@@ -573,6 +677,7 @@ export default function initGame() {
     // --- Iniciar nivel ---
     //startLevel();
     MainMenu();
+    createFixedButtons();
     
     on("levelComplete", () => {
         levelComplete = true;
