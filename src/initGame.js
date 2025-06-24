@@ -485,7 +485,11 @@ export default function initGame() {
         ]);
 
         cvSprite.onClick(() => {
-            console.log("CV Clicked");
+            window.open("https://drive.google.com/file/d/132p35gPe-9-puW-yjIGFcvz3yi0eAFtn/view?usp=sharing", "_blank");
+        });
+
+        rrssButton.onClick(() => {
+            window.open("https://linktr.ee/miguelmm95", "_blank");
         });
     }
 
