@@ -37,6 +37,7 @@ import LinkedInModal from "./ReactComponents/Modals/Contact/linkedinModal";
 import GitHubModal from "./ReactComponents/Modals/Contact/githubModal";
 import ItchioModal from "./ReactComponents/Modals/Contact/itchioModal";
 import TwitterModal from "./ReactComponents/Modals/Contact/twitterModal";
+import EmailModal from "./ReactComponents/Modals/Contact/emailModal";
 
 import { on, emit } from "./store";
 
@@ -72,6 +73,7 @@ const modalsConfig = {
   github: { component: GitHubModal },
   itchio: { component: ItchioModal },
   twitter: { component: TwitterModal },
+  email: { component: EmailModal },
 };
 
 export default function ReactUI() {

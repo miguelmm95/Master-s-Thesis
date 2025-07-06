@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function GithubModal({ visible, onClose }) {
+export default function EmailModal({ visible, onClose }) {
   if (!visible) return null;
 
   return (
@@ -13,13 +13,11 @@ export default function GithubModal({ visible, onClose }) {
           </div>
           <div className="modal-body">
             <div className="entry">
-              <h2 className="title">My GitHub page</h2>
+              <h2 className="title">Send me an Email!</h2>
             </div>
             <div className="text">
               <p>
-                On my GitHub profile (<a href="https://github.com/miguelmm95" target="_blank" rel="noopener noreferrer">@miguelmm95</a>), you’ll find personal projects showcasing my technical skills, 
-                along with academic assignments that highlight my growth. Each repository offers a glimpse into my creative process and journey 
-                as a developer. Feel free to explore!
+
               </p>
             </div>
           </div>

@@ -154,11 +154,6 @@ export default function initGame() {
 
     const flipSounds = ["cardFlip1", "cardFlip2"];
 
-    // k.add([
-    //     k.sprite("background"),
-    //     k.pos(0, 0),
-    //     k.layer("bg")
-    // ]);
 
     // --- Utilidades ---
     function getCurrentLevelCards(level) {
