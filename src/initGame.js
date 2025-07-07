@@ -97,9 +97,13 @@ export default function initGame() {
                 { src: "./assets/images/cards/codeCard.png", data: "codeLanguages" },
             ],
             dialogs: [
-                { text: "TO DO 1 Skills", speaker: "Sistema" },
-                { text: "TO DO 2 Skills", speaker: "Guía" },
-                { text: "TO DO 3 Skills", speaker: "Sistema" }
+                { text: "Strength is forged in fire... but tools must stay razor-sharp.", speaker: "Seer:" },
+                { text: "Fullstack web developer, software and game programmer, all the way to network administrator.", speaker: "You:" },
+                { text: "His thirst for knowledge is... admirable. I like what I'm seeing.", speaker: "You:" },
+                { text: "With these years of experience and education, he must possess exceptional skills.", speaker: "You:" },
+                { text: "Tools that materialize what only he can envision.", speaker: "Seer:" },
+                { text: "Weapons that shatter boundaries between thought and creation.", speaker: "Seer:" },
+                { text: "Let's see how sharp they are.", speaker: "Seer:" }
             ]
         },
         {
@@ -112,9 +116,11 @@ export default function initGame() {
                 { src: "./assets/images/cards/tfmCard.png", data: "tfm" },
             ],
             dialogs: [
-                { text: "TO DO 1 Projects", speaker: "Sistema" },
-                { text: "TO DO 2 Projects", speaker: "Guía" },
-                { text: "TO DO 3 Projects", speaker: "Sistema" }
+                { text: "The tools are sharpened... but true art lies in their application.", speaker: "Seer:" },
+                { text: "His skills are astonishing! He masters multiple code languages, modern frameworks and game engines!", speaker: "You:" },
+                { text: "The technical knowledge is impressive... but tell me, recruiter...", speaker: "Seer:" },
+                { text: "What good is a perfect weapon without works to demonstrate its power?", speaker: "Seer:" },
+                { text: "His soul has revealed what he knows... now we shall behold what he's forged.", speaker: "Seer:" }
             ]
         },
         {
@@ -127,9 +133,14 @@ export default function initGame() {
                 { src: "./assets/images/cards/emailCard.png", data: "email" },
             ],
             dialogs: [
-                { text: "TO DO 1 Contact", speaker: "Sistema" },
-                { text: "TO DO 2 Contact", speaker: "Guía" },
-                { text: "TO DO 3 Contact", speaker: "Sistema" }
+                { text: "I must admit... when I first walked in here, I thought you were a fraud.", speaker: "You:" },
+                { text: "But after this experience... I see it was all true.", speaker: "You:" },
+                { text: "You've found the perfect candidate for our company.", speaker: "You:" },
+                { text: "*The candle flames flicker blue as the seer smiles knowingly*", speaker: "" },
+                { text: "The threads of fate never lie, recruiter.", speaker: "Seer:" },
+                { text: "They merely revealed what your heart already knew.", speaker: "Seer:" },
+                { text: "*The seer throw cards across the table one final time*", speaker: "" },
+                { text: "Miguel has played his part... now the next move is yours to make.", speaker: "Seer:" }
             ]
         }
     ];
