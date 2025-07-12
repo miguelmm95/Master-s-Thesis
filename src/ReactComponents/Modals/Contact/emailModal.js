@@ -14,10 +14,10 @@ export default function EmailModal({ visible, onClose }) {
 
         emailjs
             .sendForm(
-                process.env.REACT_APP_EMAILJS_SERVICE_ID,  // Reemplaza con tu Service ID
-                process.env.REACT_APP_EMAILJS_TEMPLATE_ID, // Reemplaza con tu Template ID
+                process.env.REACT_APP_EMAILJS_SERVICE_ID,
+                process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
                 form.current,
-                { publicKey: process.env.REACT_APP_EMAILJS_PUBLIC_KEY }  // Reemplaza con tu Public Key
+                { publicKey: process.env.REACT_APP_EMAILJS_PUBLIC_KEY }
             )
             .then(
                 () => {
