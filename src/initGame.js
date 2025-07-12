@@ -1,8 +1,8 @@
 import initKaplay from "./kaplayCtx";
 import { emit, on } from "./store";
 
-import { levels } from "./levels";
-import { createDialogBox } from "./dialogBox";
+import { levels } from "./Components/levels";
+import { createDialogBox } from "./Components/dialogBox";
 
 export default function initGame() {
     const k = initKaplay();
