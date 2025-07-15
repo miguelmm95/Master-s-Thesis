@@ -116,6 +116,7 @@ export default function initGame() {
             {
                 x, y,
                 flipped: false,
+                matched: false,
                 cardData,
             }
         ]);
@@ -143,6 +144,17 @@ export default function initGame() {
         });
 
         card.onClick(() => {
+            if (card.flipped) {
+                const isMatchedCard = card.matched || 
+                             (firstCard && secondCard && 
+                              firstCard.cardData.src === secondCard.cardData.src && 
+                              (card === firstCard || card === secondCard));
+                if (isMatchedCard) {
+                    const cardData = card.cardData.data;
+                    if (cardData) emit(cardData);
+                    return;
+                }
+            }
             if (isDialogOpen || isSpawningCards) return;
             if (lockBoard || card.flipped) return;
 
@@ -163,6 +175,8 @@ export default function initGame() {
                 if (firstCard.cardData.src === secondCard.cardData.src) {
 
                     //Cartas coinciden
+                    firstCard.matched = true;
+                    secondCard.matched = true;
                     const data = firstCard.cardData.data;
                     
                     setTimeout(() => {

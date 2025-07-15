@@ -2,7 +2,7 @@ export const levels = [
     {
         id: "aboutMe",
         cards: [
-            { src: "./assets/images/cards/aboutMeCard.png", data: "aboutMe" },
+            { src: "../assets/images/cards/aboutMeCard.png", data: "aboutMe" },
         ],
         dialogs: [
             { text: "*Finding the perfect candidate... a quest as elusive as a shadow in the fog.*", speaker: "" },
