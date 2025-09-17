@@ -1,3 +1,7 @@
+// Credits Modals
+import JMMModal from "../ReactComponents/Modals/Credits/jmmModal";
+import MMMModal from "../ReactComponents/Modals/Credits/mmmModal";
+
 // About Me
 import AboutMeModal from "../ReactComponents/Modals/aboutMeModal";
 
@@ -38,6 +42,9 @@ import TwitterModal from "../ReactComponents/Modals/Contact/twitterModal";
 import EmailModal from "../ReactComponents/Modals/Contact/emailModal";
 
 export const modalsConfig = {
+  jmm: { component: JMMModal },
+  mmm: { component: MMMModal },
+  
   aboutMe: { component: AboutMeModal },
 
   IT: { component: ITModal },

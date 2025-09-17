@@ -417,6 +417,12 @@ export default function initGame() {
     }
 
     function showCredits() {
+        firstCard = null;
+        secondCard = null;
+        lockBoard = false;
+        matchedCount = 0;
+        isDialogOpen = false;
+        isSpawningCards = false;
         k.destroyAll("card");
 
         const currentCredits = credits[0];
@@ -512,6 +518,9 @@ export default function initGame() {
     });
 
     on("modalClosed", () => {
+        if (isCredits) {
+            return;
+        }
         if(levelComplete){
             levelComplete = false;
 
