@@ -22,19 +22,13 @@ export default function MMMModal({ visible, onClose }) {
               />
               <div className="profile-text">
                 <h2 className="profile-name">Miguel Martínez Martínez</h2>
-                <h3 className="profile-subtitle">Fullstack Developer | Game Designer & Developer | IT Specialist</h3>
+                <h3 className="profile-subtitle">Game Designer & Developer | Fullstack Developer | IT Specialist</h3>
                 <div className="about-text">
                   <p>
-                    Hello! I'm Miguel, a 29-year-old developer from Valencia, Spain, a native <strong>Spanish and Valencian/Catalan speaker</strong> with <strong>professional English fluency</strong>.
+                    Hi, I'm Miguel, and this page is my Master's thesis and portfolio! I designed and developed this interactive experience to showcase my skills and projects.
                   </p>
                   <p>
-                    My passion for technology began in childhood and evolved into expertise across software development, 
-                    systems engineering, and game design. I specialize in creating digital experiences that blend technical 
-                    precision with creative vision - like this interactive portfolio you're exploring!
-                  </p>
-                  <p>
-                    When I'm not coding, you'll find me playing videogames, reading sci-fi/fantasy novels, 
-                    doing some outdoor activity or playing the Pokemon TCG with friends.
+                    If you want to know more about me and haven't played my portfolio yet, I invite you to give it a try!
                   </p>
                 </div>
               </div>

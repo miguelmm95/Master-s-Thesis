@@ -19,11 +19,11 @@ export default function SH2Modal({ visible, onClose }) {
             <div className="text">
               <p> 
                 This project is a custom-built <strong>C# application</strong> designed to assist the <strong>No Hit community</strong> of 
-                <em>Silent Hill 2 (2001)</em> — players who complete the game without taking any damage. 
+                <em> Silent Hill 2 (2001)</em> — players who complete the game without taking any damage. 
                 The tool reads and displays key in-game statistics in real time, including the player’s health, in-game time, and weapon ammunition.
               </p> 
               <p> 
-                Developed in <strong>Visual Studio</strong>, the tool leverages <strong>reverse engineering techniques</strong> 
+                Developed in <strong>Visual Studio</strong>, the tool leverages <strong>reverse engineering techniques </strong> 
                 using Cheat Engine to identify and read the relevant memory addresses of the game. Once configured, 
                 it provides a clean and live interface that allows players or streamers to monitor critical values during gameplay, 
                 making it easier to track progress and identify potential runs.

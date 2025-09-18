@@ -22,7 +22,7 @@ export default function AboutMeModal({ visible, onClose }) {
               />
               <div className="profile-text">
                 <h2 className="profile-name">Miguel Martínez Martínez</h2>
-                <h3 className="profile-subtitle">Fullstack Developer | Game Designer & Developer | IT Specialist</h3>
+                <h3 className="profile-subtitle">Game Designer & Developer | Fullstack Developer | IT Specialist</h3>
                 <div className="about-text">
                   <p>
                     Hello! I'm Miguel, a 29-year-old developer from Valencia, Spain, a native <strong>Spanish and Valencian/Catalan speaker</strong> with <strong>professional English fluency</strong>.

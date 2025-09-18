@@ -19,7 +19,7 @@ export default function BachelorModal({ visible, onClose }) {
             <div className="text">
               <p>
               During this degree, I developed a comprehensive understanding of <strong>programming</strong>, mastering fundamental and advanced concepts essential for game development.
-              In addition to programming, I explored multiple branches of <strong>game design</strong>, including <strong>visual art</strong>, and <strong>narrative construction</strong>, allowing me to approach projects from a multidisciplinary perspective.</p>
+              In addition to programming, I explored multiple branches of <strong>video game creation</strong>, including <strong>art</strong>, <strong>narrative construction</strong> and <strong>game design</strong>, allowing me to approach projects from a multidisciplinary perspective.</p>
             <p>
               A significant part of my studies involved mastering the <strong>Unity game engine</strong>, which enabled me to create interactive and immersive experiences efficiently.</p>
             <p>
