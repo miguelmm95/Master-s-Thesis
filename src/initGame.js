@@ -6,6 +6,7 @@ import { createDialogBox } from "./Components/dialogBox";
 
 export default function initGame() {
     const k = initKaplay();
+    // k.onUpdate(() => setCursor("default"));
     
     // --- Constantes globales ---
     const cardWidth = 125;
@@ -134,21 +135,32 @@ export default function initGame() {
         });
 
         card.onHover(() => {
+            if (card.flipped && firstCard == null){
+                k.setCursor("pointer");
+            }
             if(card.flipped || lockBoard || isDialogOpen) return;
+            k.setCursor("pointer");
             card.tween(card.scale, k.vec2(1.1, 1.1), 0.2, v => card.scale = v, k.easings.linear);
         });
 
         card.onHoverEnd(() => {
+            if (card.flipped && firstCard == null){
+                k.setCursor("default");
+            }
             if(card.flipped || lockBoard || isDialogOpen) return;
+            k.setCursor("default");
             card.tween(card.scale, k.vec2(1, 1), 0.2, v => card.scale = v, k.easings.linear);
         });
 
         card.onClick(() => {
+            k.setCursor("default");
             if (card.flipped) {
+                if (firstCard && !secondCard) return;
+
                 const isMatchedCard = card.matched || 
-                             (firstCard && secondCard && 
-                              firstCard.cardData.src === secondCard.cardData.src && 
-                              (card === firstCard || card === secondCard));
+                    (firstCard && secondCard &&
+                    firstCard.cardData.src === secondCard.cardData.src &&
+                    (card === firstCard || card === secondCard));
                 if (isMatchedCard) {
                     const cardData = card.cardData.data;
                     if (cardData) emit(cardData);
@@ -215,8 +227,6 @@ export default function initGame() {
         });
     }
 
-    
-
     function MainMenu() {
         
         isCredits = false;
@@ -246,6 +256,9 @@ export default function initGame() {
             k.z(10),
             "menuUI"
         ]);
+        startButton.onHover(() => k.setCursor("pointer"));
+        startButton.onHoverEnd(() => k.setCursor("default"));
+
         const creditsButton = k.add([
             k.rect(200, 60, { radius: 12 }),
             k.pos(k.width() / 2, k.height() / 2 + 80),
@@ -255,6 +268,9 @@ export default function initGame() {
             k.z(10),
             "menuUI"
         ]);
+        creditsButton.onHover(() => k.setCursor("pointer"));
+        creditsButton.onHoverEnd(() => k.setCursor("default"));
+
         k.add([
             k.text("Start", { size: 24 }),
             k.pos(startButton.pos.x, startButton.pos.y),
@@ -274,11 +290,13 @@ export default function initGame() {
 
         startButton.onClick(() => {
             k.destroyAll("menuUI");
+            k.setCursor("default");
             startLevel();
         });
 
         creditsButton.onClick(() => {
             k.destroyAll("menuUI");
+            k.setCursor("default");
             isCredits = true;
             showCredits();
         });
@@ -296,6 +314,8 @@ export default function initGame() {
             k.fixed(),
             "fixedUI"
         ]);
+        cvSprite.onHover(() => k.setCursor("pointer"));
+        cvSprite.onHoverEnd(() => k.setCursor("default"));
 
         const rrssButton = k.add([
             k.sprite("rrssSprite"),
@@ -307,9 +327,11 @@ export default function initGame() {
             k.fixed(),
             "fixedUI"
         ]);
+        rrssButton.onHover(() => k.setCursor("pointer"));
+        rrssButton.onHoverEnd(() => k.setCursor("default"));
 
         cvSprite.onClick(() => {
-            window.open("https://drive.google.com/file/d/132p35gPe-9-puW-yjIGFcvz3yi0eAFtn/view?usp=sharing", "_blank");
+            window.open("https://drive.google.com/file/d/1jzprqZLEF4LPIrpNQyZmeuH140L0kPnb/view?usp=sharing", "_blank");
         });
 
         rrssButton.onClick(() => {
@@ -353,6 +375,8 @@ export default function initGame() {
             k.z(10),
             "endUI"
         ]);
+        restartButton.onHover(() => k.setCursor("pointer"));
+        restartButton.onHoverEnd(() => k.setCursor("default"));
 
         k.add([
             k.text("Main Menu", { size: 26 }),
@@ -373,6 +397,7 @@ export default function initGame() {
     function resetGame() {
 
         k.destroyAll();
+        k.setCursor("default");
 
 
         k.add([
@@ -399,6 +424,7 @@ export default function initGame() {
 
     function startLevel() {
         k.destroyAll("card");
+        k.setCursor("default");
 
         const currentLevel = levels[currentLevelIndex];
 
@@ -438,6 +464,8 @@ export default function initGame() {
             k.z(10),
             "creditsUI"
         ]);
+        backButton.onHover(() => k.setCursor("pointer"));
+
         k.add([
             k.text("Back", { size: 24 }),
             k.pos(backButton.pos.x, backButton.pos.y),
